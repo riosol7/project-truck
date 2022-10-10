@@ -1,39 +1,59 @@
-package com.transporation.entity;
+package com.truck.model;
 
 import java.util.Date;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+public class TruckTransportation {
 
-@Document(collection = "Route")
-public class Route {
-
-	@Id
-	String id;
-	
 	int truckId;
+	String make;
+	String model;
+	int year;
+
+	String routeId;
 	Date startDate;
 	Date endDate;
 	String startingPoint;
 	String destination;
 	Boolean completed;
-	
-	public void RouteEntity() {}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-	
 	public int getTruckId() {
 		return truckId;
 	}
 
 	public void setTruckId(int truckId) {
 		this.truckId = truckId;
+	}
+
+	public String getMake() {
+		return make;
+	}
+
+	public void setMake(String make) {
+		this.make = make;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public String getRouteId() {
+		return routeId;
+	}
+
+	public void setRouteId(String routeId) {
+		this.routeId = routeId;
 	}
 
 	public Date getStartDate() {
@@ -78,9 +98,8 @@ public class Route {
 
 	@Override
 	public String toString() {
-		return "Route [id=" + id + ", truckId=" + truckId + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", startingPoint=" + startingPoint + ", destination=" + destination + ", completed=" + completed
-				+ "]";
-	};
-	
+		return "TruckTransportation [truckId=" + truckId + ", make=" + make + ", model=" + model + ", year=" + year
+				+ ", routeId=" + routeId + ", startDate=" + startDate + ", endDate=" + endDate + ", startingPoint="
+				+ startingPoint + ", destination=" + destination + ", completed=" + completed + "]";
+	}
 }

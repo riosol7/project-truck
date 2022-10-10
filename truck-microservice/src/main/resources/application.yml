@@ -13,3 +13,4 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
     show-sql: true
+transportation.url: http://localhost:8000/api/v1/transportation?truckId=

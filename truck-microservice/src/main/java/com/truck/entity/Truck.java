@@ -1,5 +1,6 @@
 package com.truck.entity;
 
+//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,17 +11,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "truck")
 public class Truck {
-	
+
 	@Id
 	@Column(name = "truck_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	String make;
 	String model;
 	int year;
-	
-	public void truckEntity() {}
+
+//	@OneToOne(targetEntity = Transportation.class, cascade = CascadeType.ALL)
+
+	public void truckEntity() {
+	}
 
 	public int getId() {
 		return id;
@@ -58,5 +62,5 @@ public class Truck {
 	public String toString() {
 		return "Truck [id=" + id + ", make=" + make + ", model=" + model + ", year=" + year + "]";
 	};
-	
+
 }
