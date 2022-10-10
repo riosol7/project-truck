@@ -1,5 +1,6 @@
 package com.truck.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 import com.truck.entity.Truck;
 import com.truck.model.TruckTransportation;
 import com.truck.repo.TruckRepo;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @Service
 public class TruckService {
@@ -32,6 +35,7 @@ public class TruckService {
 		return repo.findAll();
 	};
 
+	@CircuitBreaker(name = "transportation", fallbackMethod = "findTruckRouteByTruckId")
 	public TruckTransportation findById(int id) {
 
 		Truck foundTruck = repo.findById(id).orElse(null);
@@ -47,6 +51,27 @@ public class TruckService {
 
 		return details;
 	};
+	
+	public TruckTransportation findTruckRouteByTruckId(int id, Exception e) {
+		
+		Truck foundTruck = repo.findById(id).orElse(null);
+		
+		TruckTransportation stale = new TruckTransportation();
+		
+		stale.setTruckId(id);
+		stale.setMake(foundTruck.getMake());
+		stale.setModel(foundTruck.getModel());
+		stale.setYear(foundTruck.getYear());
+		
+		stale.setRouteId("10001");
+		stale.setStartDate(new Date());
+		stale.setEndDate(new Date());
+		stale.setStartingPoint(null);
+		stale.setDestination(null);
+		stale.setCompleted(false);		
+		
+		return stale;
+	}
 
 	public List<Truck> findByMake(String make) {
 		return repo.findByMake(make);
