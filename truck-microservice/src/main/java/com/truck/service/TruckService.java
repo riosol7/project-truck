@@ -51,25 +51,25 @@ public class TruckService {
 
 		return details;
 	};
-	
+
 	public TruckTransportation findTruckRouteByTruckId(int id, Exception e) {
-		
+
 		Truck foundTruck = repo.findById(id).orElse(null);
-		
+
 		TruckTransportation stale = new TruckTransportation();
-		
+
 		stale.setTruckId(id);
 		stale.setMake(foundTruck.getMake());
 		stale.setModel(foundTruck.getModel());
 		stale.setYear(foundTruck.getYear());
-		
+
 		stale.setRouteId("10001");
 		stale.setStartDate(new Date());
 		stale.setEndDate(new Date());
 		stale.setStartingPoint(null);
 		stale.setDestination(null);
-		stale.setCompleted(false);		
-		
+		stale.setCompleted(false);
+
 		return stale;
 	}
 
