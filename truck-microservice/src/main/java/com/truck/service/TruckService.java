@@ -1,7 +1,6 @@
 package com.truck.service;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class TruckService {
 	public Truck post(Truck truck) {
 		return repo.save(truck);
 	};
-
+	
 	public List<Truck> findAll() {
 		return repo.findAll();
 	};
@@ -51,7 +50,7 @@ public class TruckService {
 		details.setModel(foundTruck.getModel());
 		details.setYear(foundTruck.getYear());
 		details.setWeight(foundTruck.getWeight());
-		details.setWeight(foundTruck.getVolume());
+		details.setVolume(foundTruck.getVolume());
 		details.setMpg(foundTruck.getMpg());
 		details.setSpace(foundTruck.getSpace());
 		details.setType(foundTruck.getType());
@@ -61,35 +60,8 @@ public class TruckService {
 
 	public TruckTransportation findTruckRouteByTruckId(int id, Exception e) {
 
-		Truck foundTruck = repo.findById(id).orElse(new Truck());
-
-		if (foundTruck.getMake() == null && foundTruck.getModel() == null && foundTruck.getWeight() == null
-				&& foundTruck.getVolume() == null && foundTruck.getSpace() == null && foundTruck.getType() == null) {
-
-			TruckTransportation stale = new TruckTransportation();
-
-			stale.setTruckId(id);
-			stale.setMake("honda");
-			stale.setModel("ridgeline");
-			stale.setYear(2020);
-			stale.setWeight("5000 kg");
-			stale.setVolume("15 M");
-			stale.setMpg(30);
-			stale.setSpace("10m x 2m");
-			stale.setType(Type.ELECTRIC);
-
-			stale.setRouteId("10001");
-			stale.setStartDate(new Date());
-			stale.setEndDate(new Date());
-
-			Time time = new Time(0L);
-			stale.setStartTime(time);
-			stale.setEndTime(time);
-			stale.setStatus(Status.valueOf("IN_PROGRESS"));
-
-			return stale;
-
-		}
+		Truck foundTruck = repo.findById(id)
+				.orElse(new Truck(id, "honda", "ridgeline", 2020, "5000 kg", "15 M", 30, "10m x 2m", Type.ELECTRIC));
 
 		TruckTransportation stale = new TruckTransportation();
 
@@ -102,30 +74,31 @@ public class TruckService {
 		stale.setMpg(foundTruck.getMpg());
 		stale.setSpace(foundTruck.getSpace());
 		stale.setType(foundTruck.getType());
-
 		stale.setRouteId("10001");
-		stale.setStartDate(new Date());
-		stale.setEndDate(new Date());
 
-		Time time = new Time(0L);
-		stale.setStartTime(time);
-		stale.setEndTime(time);
+		LocalDate date = LocalDate.of(2010, 12, 30);
+		stale.setStartDate(date);
+		stale.setEndDate(date);
 		stale.setStatus(Status.valueOf("IN_PROGRESS"));
 
 		return stale;
 	}
 
-	public List<Truck> findByMake(String make) {
-		return repo.findByMake(make);
+	public List<Truck> findByMakeAndModel(String make, String model) {
+		return repo.findByMakeAndModel(make, model);
 	};
-
-	public List<Truck> findByModel(String model) {
-		return repo.findByModel(model);
-	};
-
-	public List<Truck> findByYear(int year) {
-		return repo.findByYear(year);
-	};
+	
+//	public List<Truck> findByMake(String make) {
+//		return repo.findByMake(make);
+//	};
+//
+//	public List<Truck> findByModel(String model) {
+//		return repo.findByModel(model);
+//	};
+//
+//	public List<Truck> findByYear(int year) {
+//		return repo.findByYear(year);
+//	};
 
 	public Truck put(Truck truck) {
 		Truck updatedTruck = repo.findById(truck.getId()).orElse(null);

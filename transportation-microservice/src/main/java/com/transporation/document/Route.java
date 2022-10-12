@@ -1,11 +1,11 @@
 package com.transporation.document;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.transportation.enums.Status;
 
 @Document(collection = "Route")
@@ -15,16 +15,15 @@ public class Route {
 	String routeId;
 
 	int truckId;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate endDate;
-	private LocalTime startTime;
-	private LocalTime endTime;
-	// private Destination From;
-	// private Destination To;
+//	private String source;
+//	private String destination;
 	private Status status;
 
-	public void RouteEntity() {
-	}
+	public void RouteEntity() {}
 
 	public String getRouteId() {
 		return routeId;
@@ -58,22 +57,6 @@ public class Route {
 		this.endDate = endDate;
 	}
 
-	public LocalTime getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(LocalTime startTime) {
-		this.startTime = startTime;
-	}
-
-	public LocalTime getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(LocalTime endTime) {
-		this.endTime = endTime;
-	}
-
 	public Status getStatus() {
 		return status;
 	}
@@ -85,7 +68,7 @@ public class Route {
 	@Override
 	public String toString() {
 		return "Route [routeId=" + routeId + ", truckId=" + truckId + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", startTime=" + startTime + ", endTime=" + endTime + "]";
+				+ endDate + ", status=" + status + "]";
 	}
 
 }

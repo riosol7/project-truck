@@ -8,6 +8,8 @@ import com.truck.entity.Truck;
 
 public interface TruckRepo extends JpaRepository<Truck, Integer> {
 
+	List<Truck> findByMakeAndModel(String make, String model);
+	
 	List<Truck> findByMake(String make);
 
 	List<Truck> findByModel(String model);

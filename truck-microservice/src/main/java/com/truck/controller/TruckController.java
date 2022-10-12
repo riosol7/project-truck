@@ -1,18 +1,12 @@
 package com.truck.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.truck.entity.Truck;
 import com.truck.model.TruckTransportation;
@@ -40,20 +34,25 @@ public class TruckController {
 		return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
 	};
 
-	@GetMapping("/make/{value}")
-	public ResponseEntity<List<Truck>> findByMake(@PathVariable("value") String make) {
-		return new ResponseEntity<>(service.findByMake(make), HttpStatus.OK);
+	@GetMapping("/search")
+	public ResponseEntity<List<Truck>> findByMakeAndModel(@RequestParam Map<String,String> requestParams) {
+		return new ResponseEntity<>(service.findByMakeAndModel(requestParams.get("make"), requestParams.get("model")), HttpStatus.OK);
 	};
-
-	@GetMapping("/model/{value}")
-	public ResponseEntity<List<Truck>> findByModel(@PathVariable("value") String model) {
-		return new ResponseEntity<>(service.findByModel(model), HttpStatus.OK);
-	};
-
-	@GetMapping("/year/{value}")
-	public ResponseEntity<List<Truck>> findByModel(@PathVariable("value") int year) {
-		return new ResponseEntity<>(service.findByYear(year), HttpStatus.OK);
-	};
+	
+//	@GetMapping("/make/{value}")
+//	public ResponseEntity<List<Truck>> findByMake(@PathVariable("value") String make) {
+//		return new ResponseEntity<>(service.findByMake(make), HttpStatus.OK);
+//	};
+//
+//	@GetMapping("/model/{value}")
+//	public ResponseEntity<List<Truck>> findByModel(@PathVariable("value") String model) {
+//		return new ResponseEntity<>(service.findByModel(model), HttpStatus.OK);
+//	};
+//
+//	@GetMapping("/year/{value}")
+//	public ResponseEntity<List<Truck>> findByModel(@PathVariable("value") int year) {
+//		return new ResponseEntity<>(service.findByYear(year), HttpStatus.OK);
+//	};
 
 	@PutMapping
 	public ResponseEntity<Truck> put(@RequestBody Truck truck) {

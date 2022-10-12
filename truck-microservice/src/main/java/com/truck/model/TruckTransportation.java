@@ -1,8 +1,8 @@
 package com.truck.model;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.truck.enums.Status;
 import com.truck.enums.Type;
 
@@ -19,12 +19,13 @@ public class TruckTransportation {
 	Type type;
 
 	String routeId;
-	Date startDate;
-	Date endDate;
-	Time startTime;
-	Time endTime;
-	// destination;
-	Status status;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate startDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate endDate;
+//	  private String source;
+//	  private String destination;
+	private Status status;
 
 	public int getTruckId() {
 		return truckId;
@@ -106,36 +107,20 @@ public class TruckTransportation {
 		this.routeId = routeId;
 	}
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
-	}
-
-	public Time getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(Time time) {
-		this.startTime = time;
-	}
-
-	public Time getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Time endTime) {
-		this.endTime = endTime;
 	}
 
 	public Status getStatus() {
@@ -150,7 +135,7 @@ public class TruckTransportation {
 	public String toString() {
 		return "TruckTransportation [truckId=" + truckId + ", make=" + make + ", model=" + model + ", year=" + year
 				+ ", weight=" + weight + ", volume=" + volume + ", mpg=" + mpg + ", space=" + space + ", type=" + type
-				+ ", routeId=" + routeId + ", startDate=" + startDate + ", endDate=" + endDate + ", startTime="
-				+ startTime + ", endTime=" + endTime + ", status=" + status + "]";
+				+ ", routeId=" + routeId + ", startDate=" + startDate + ", endDate=" + endDate + ", status=" + status
+				+ "]";
 	}
 }
