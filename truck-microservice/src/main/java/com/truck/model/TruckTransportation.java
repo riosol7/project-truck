@@ -1,6 +1,10 @@
 package com.truck.model;
 
+import java.sql.Time;
 import java.util.Date;
+
+import com.truck.enums.Status;
+import com.truck.enums.Type;
 
 public class TruckTransportation {
 
@@ -8,13 +12,19 @@ public class TruckTransportation {
 	String make;
 	String model;
 	int year;
+	String weight;
+	String volume;
+	int mpg;
+	String space;
+	Type type;
 
 	String routeId;
 	Date startDate;
 	Date endDate;
-	String startingPoint;
-	String destination;
-	Boolean completed;
+	Time startTime;
+	Time endTime;
+	// destination;
+	Status status;
 
 	public int getTruckId() {
 		return truckId;
@@ -48,6 +58,46 @@ public class TruckTransportation {
 		this.year = year;
 	}
 
+	public String getWeight() {
+		return weight;
+	}
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+
+	public String getVolume() {
+		return volume;
+	}
+
+	public void setVolume(String volume) {
+		this.volume = volume;
+	}
+
+	public int getMpg() {
+		return mpg;
+	}
+
+	public void setMpg(int mpg) {
+		this.mpg = mpg;
+	}
+
+	public String getSpace() {
+		return space;
+	}
+
+	public void setSpace(String space) {
+		this.space = space;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
 	public String getRouteId() {
 		return routeId;
 	}
@@ -72,34 +122,35 @@ public class TruckTransportation {
 		this.endDate = endDate;
 	}
 
-	public String getStartingPoint() {
-		return startingPoint;
+	public Time getStartTime() {
+		return startTime;
 	}
 
-	public void setStartingPoint(String startingPoint) {
-		this.startingPoint = startingPoint;
+	public void setStartTime(Time time) {
+		this.startTime = time;
 	}
 
-	public String getDestination() {
-		return destination;
+	public Time getEndTime() {
+		return endTime;
 	}
 
-	public void setDestination(String destination) {
-		this.destination = destination;
+	public void setEndTime(Time endTime) {
+		this.endTime = endTime;
 	}
 
-	public Boolean getCompleted() {
-		return completed;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setCompleted(Boolean completed) {
-		this.completed = completed;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
 		return "TruckTransportation [truckId=" + truckId + ", make=" + make + ", model=" + model + ", year=" + year
-				+ ", routeId=" + routeId + ", startDate=" + startDate + ", endDate=" + endDate + ", startingPoint="
-				+ startingPoint + ", destination=" + destination + ", completed=" + completed + "]";
+				+ ", weight=" + weight + ", volume=" + volume + ", mpg=" + mpg + ", space=" + space + ", type=" + type
+				+ ", routeId=" + routeId + ", startDate=" + startDate + ", endDate=" + endDate + ", startTime="
+				+ startTime + ", endTime=" + endTime + ", status=" + status + "]";
 	}
 }

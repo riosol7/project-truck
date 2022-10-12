@@ -1,9 +1,12 @@
 package com.transporation.document;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.transportation.enums.Status;
 
 @Document(collection = "Route")
 public class Route {
@@ -12,22 +15,24 @@ public class Route {
 	String routeId;
 
 	int truckId;
-	Date startDate;
-	Date endDate;
-	String startingPoint;
-	String destination;
-	Boolean completed;
+	private LocalDate startDate;
+	private LocalDate endDate;
+	private LocalTime startTime;
+	private LocalTime endTime;
+	// private Destination From;
+	// private Destination To;
+	private Status status;
 
 	public void RouteEntity() {
 	}
 
 	public String getRouteId() {
 		return routeId;
-	};
+	}
 
 	public void setRouteId(String routeId) {
 		this.routeId = routeId;
-	};
+	}
 
 	public int getTruckId() {
 		return truckId;
@@ -37,51 +42,50 @@ public class Route {
 		this.truckId = truckId;
 	}
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
-	public String getStartingPoint() {
-		return startingPoint;
+	public LocalTime getStartTime() {
+		return startTime;
 	}
 
-	public void setStartingPoint(String startingPoint) {
-		this.startingPoint = startingPoint;
+	public void setStartTime(LocalTime startTime) {
+		this.startTime = startTime;
 	}
 
-	public String getDestination() {
-		return destination;
+	public LocalTime getEndTime() {
+		return endTime;
 	}
 
-	public void setDestination(String destination) {
-		this.destination = destination;
+	public void setEndTime(LocalTime endTime) {
+		this.endTime = endTime;
 	}
 
-	public Boolean getCompleted() {
-		return completed;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setCompleted(Boolean completed) {
-		this.completed = completed;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
 		return "Route [routeId=" + routeId + ", truckId=" + truckId + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", startingPoint=" + startingPoint + ", destination=" + destination + ", completed="
-				+ completed + "]";
-	};
+				+ endDate + ", startTime=" + startTime + ", endTime=" + endTime + "]";
+	}
 
 }
